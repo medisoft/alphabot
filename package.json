@@ -2,15 +2,19 @@
   "name": "alphabot",
   "version": "1.0.0",
   "description": "",
+  "author": "",
+  "files": [
+    ""
+  ],
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "keywords": [],
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "@mcampa/pca9685": "^4.0.4",
     "express": "^4.17.1",
     "generator-koajs": "^1.2.2",
-    "koa": "^2.13.1",
+    "koa": "^2.5.3",
+    "koa-router": "^7.4.0",
     "lodash": "^4.17.20",
     "node-red-contrib-vcgencmd": "^1.0.3",
     "onoff": "^6.0.1",
@@ -27,7 +31,18 @@
     "vcgencmd": "^0.3.0",
     "yo": "^3.1.1"
   },
-  "keywords": [],
-  "author": "",
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "engines": {
+    "npm": ">= 5.0.0"
+  },
+  "scripts": {
+    "test": "jest .",
+    "start": "node ./src/app",
+    "lint": "eslint ."
+  },
   "license": "ISC"
 }

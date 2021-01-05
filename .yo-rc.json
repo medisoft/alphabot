@@ -1,0 +1,8 @@
+{
+  "generator-koajs": {
+    "promptValues": {
+      "authorName": "Mario Medina",
+      "authorEmail": "mario@mariomedina.net"
+    }
+  }
+}
