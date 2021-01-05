@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const cors = require('@koa/cors');
 const Router = require('koa-router');
 
 const router = new Router();
@@ -53,6 +54,8 @@ const f = (t) => {
  * @returns {Promise<void>}
  */
 const organic_setpos = async (pos, motor, speed = 1) => {
+  motor.posicion = pos;
+  return setpos(motor.posicion, motor.canal);
   const maxSpeed = 60 / 0.2; // Velocidad maxima del servo segun la spec sheet
   const sumSteps = 29.50247262315665; // Suma total del tiempo requerido, para calcular el factor de multiplicacion de la pausa
   let ini = motor.posicion;
@@ -97,16 +100,16 @@ router.get('/move', async (ctx) => {
     if (!pata) throw new Error('No existe la pata seleccionada');
     const motor = pata[ctx.query.motor];
     if (!motor) throw new Error('No existe el motor seleccionado');
-    let { posicion, speed, direccion } = ctx.query;
+    let { posicion, speed = 1, direccion } = ctx.query;
     if (direccion) {
-      if (direccion === 'l' || direccion === 'u') posicion = motor.posicion += 0.01;
-      else if (direccion === 'r' || direccion === 'd') posicion = motor.posicion -= 0.01;
+      if (direccion === 'l' || direccion === 'u') posicion = motor.posicion + 0.025;
+      else if (direccion === 'r' || direccion === 'd') posicion = motor.posicion - 0.025;
       else throw new Error('Direccion de movimiento invalida');
     }
     if (posicion < 0 || posicion > 1) throw new Error('La posicion es entre 0 y 1');
-    if (speed < 0 || speed > 1) throw new Error('La speed es entre 0 y 1');
-    console.log(ctx.query)
-    organic_setpos(posicion, motor, speed || 1)
+    if (speed <= 0 || speed > 1) throw new Error('La speed es entre 0 y 1');
+    console.log('Moviendo %s hacia %s velocidad %s', ctx.query.pata, posicion, speed)
+    await organic_setpos(posicion, motor, speed || 1)
     ctx.body = { success: true, message: 'Posicion establecida' };
   } catch (err) {
     ctx.body = { success: false, message: err.message };
