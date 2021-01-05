@@ -97,7 +97,12 @@ router.get('/move', async (ctx) => {
     if (!pata) throw new Error('No existe la pata seleccionada');
     const motor = pata[ctx.query.motor];
     if (!motor) throw new Error('No existe el motor seleccionado');
-    const { posicion, speed } = ctx.query;
+    let { posicion, speed, direccion } = ctx.query;
+    if (direccion) {
+      if (direccion === 'l' || direccion === 'u') posicion = motor.posicion += 0.01;
+      else if (direccion === 'r' || direccion === 'd') posicion = motor.posicion -= 0.01;
+      else throw new Error('Direccion de movimiento invalida');
+    }
     if (posicion < 0 || posicion > 1) throw new Error('La posicion es entre 0 y 1');
     if (speed < 0 || speed > 1) throw new Error('La speed es entre 0 y 1');
     console.log(ctx.query)
