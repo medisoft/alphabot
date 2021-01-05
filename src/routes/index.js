@@ -85,6 +85,11 @@ router.get('/', async (ctx) => {
   };
 });
 
+router.get('/off', async (ctx) => {
+  pwm.allChannelsOff();
+  ctx.body = { success: true, message: 'Todos los motores fueron apagados' };
+});
+
 router.get('/home', async (ctx) => {
   for (let pata of Object.values(motores)) {
     for (let motor of Object.values(pata)) {
@@ -108,10 +113,11 @@ router.get('/move', async (ctx) => {
     }
     if (posicion < 0 || posicion > 1) throw new Error('La posicion es entre 0 y 1');
     if (speed <= 0 || speed > 1) throw new Error('La speed es entre 0 y 1');
-    console.log('Moviendo %s hacia %s velocidad %s', ctx.query.pata, posicion, speed)
+    console.log('Moviendo %s hacia %s velocidad %s', ctx.query.pata, direccion+' '+posicion, speed)
     await organic_setpos(posicion, motor, speed || 1)
-    ctx.body = { success: true, message: 'Posicion establecida' };
+    ctx.body = { success: true, message: 'Posicion establecida', posicion: posicion.toFixed(3) };
   } catch (err) {
+    console.log(err.message)
     ctx.body = { success: false, message: err.message };
   }
 })
