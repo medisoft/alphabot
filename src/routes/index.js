@@ -107,13 +107,17 @@ router.get('/move', async (ctx) => {
     if (!motor) throw new Error('No existe el motor seleccionado');
     let { posicion, speed = 1, direccion } = ctx.query;
     if (direccion) {
-      if (direccion === 'l' || direccion === 'u') posicion = motor.posicion + 0.025;
-      else if (direccion === 'r' || direccion === 'd') posicion = motor.posicion - 0.025;
-      else throw new Error('Direccion de movimiento invalida');
+      if (direccion === 'l' || direccion === 'u') {
+        posicion = motor.posicion + 0.025;
+        if (posicion > 1) posicion = 1;
+      } else if (direccion === 'r' || direccion === 'd') {
+        posicion = motor.posicion - 0.025;
+        if (posicion < 0) posicion = 0;
+      } else throw new Error('Direccion de movimiento invalida');
     }
     if (posicion < 0 || posicion > 1) throw new Error('La posicion es entre 0 y 1');
     if (speed <= 0 || speed > 1) throw new Error('La speed es entre 0 y 1');
-    console.log('Moviendo %s hacia %s velocidad %s', ctx.query.pata, direccion+' '+posicion, speed)
+    console.log('Moviendo %s hacia %s velocidad %s', ctx.query.pata, direccion + ' ' + posicion, speed)
     await organic_setpos(posicion, motor, speed || 1)
     ctx.body = { success: true, message: 'Posicion establecida', posicion: posicion.toFixed(3) };
   } catch (err) {
