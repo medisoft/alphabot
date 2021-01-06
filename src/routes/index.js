@@ -1,10 +1,13 @@
 const Koa = require('koa');
 const cors = require('@koa/cors');
 const Router = require('koa-router');
+const serve   = require('koa-static')
 
 const router = new Router();
 const app = new Koa();
 app.use(cors());
+app.use(serve(__dirname + '/src/www/build'));
+
 
 const _ = require('lodash');
 const fs = require('fs'), { O_RDWR } = fs.constants;
@@ -132,4 +135,8 @@ router.get('/standup', async (ctx) => {
 
 });
 app.use(router.routes());
+
+app.use(function* index() {
+  yield send(this, __dirname + '/src/www/build/index.html');
+});
 module.exports = app;
