@@ -54,8 +54,8 @@ const f = (t) => {
  * @returns {Promise<void>}
  */
 const organic_setpos = async (pos, motor, speed = 1) => {
-  motor.posicion = pos;
-  return setpos(motor.posicion, motor.canal);
+//  motor.posicion = pos;
+//  return setpos(motor.posicion, motor.canal);
   const maxSpeed = 60 / 0.2; // Velocidad maxima del servo segun la spec sheet
   const sumSteps = 29.50247262315665; // Suma total del tiempo requerido, para calcular el factor de multiplicacion de la pausa
   let ini = motor.posicion;
