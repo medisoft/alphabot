@@ -19,7 +19,7 @@ const i2c = I2CBus.openSync(1, O_RDWR);
 const opt = {
   i2c,
   address: 0x40,
-  frequency: 100,
+  frequency: 50,
   debug: false
 };
 const pwm = new Pca9685Driver(opt, (err) => {
