@@ -115,7 +115,7 @@ const motores = {
       }
     }
   },
-/*
+
   pata5: {
     hombro: {
       posicion: 0.5,
@@ -151,7 +151,7 @@ const motores = {
         up: '', down: ''
       }
     },
-/!*
+/*
     brazo: {
       posicion: 0.5,
       direccion: 0x41,
@@ -160,8 +160,8 @@ const motores = {
         up: '', down: ''
       }
     },
-*!/
-    /!*
+*/
+    /*
         antebrazo: {
           posicion: 0.5,
           direccion: 0x41,
@@ -170,9 +170,8 @@ const motores = {
         up: '', down: ''
       }
         }
-    *!/
+    */
   }, // Revisar la direccion del segundo modulo PWM
-*/
 };
 
 module.exports = motores;

@@ -15,7 +15,7 @@ const pwm = new Pca9685Driver(opt, (err) => {
 });
 
 const setpos = async (pos, channel = 0) => {
-  const max = 1091, min = 145; // 1093, 145... 1092-145
+  const max = 1085, min = 145; // 1093, 145... 1092-145
   const p = (max - min) * pos + min;
   await pwm.setPulseRange(channel, 0, p);
 };

@@ -54,28 +54,43 @@ function App() {
     setpos(4, 'brazo', 0.75);
     await pausa(1000);
 
-    setpos(2, 'brazo', 0.5);
-    setpos(2, 'antebrazo', 1);
-    await pausa(1000);
-    setpos(2, 'brazo', 0);
-    setpos(1, 'brazo', 0.5);
-    await pausa(1000);
-    setpos(3, 'brazo', 0.5);
-    setpos(3, 'antebrazo', 1);
-    await pausa(1000);
-    setpos(3, 'brazo', 0);
-    setpos(4, 'brazo', 0.5);
-    await pausa(1000);
 
 
-    setpos(2, 'brazo', 0.5);
-    setpos(2, 'antebrazo', 0);
-    await pausa(2000);
+//    setpos(1, 'hombro', 0.5);
+//    setpos(2, 'hombro', 0.5);
+//    setpos(3, 'hombro', 0.5);
+//    setpos(4, 'hombro', 0.5);
+//    await pausa(1000);
 
-    setpos(3, 'brazo', 0.5);
-    setpos(3, 'antebrazo', 0);
-    await pausa(1000);
+//    setpos(1, 'brazo', 0.65);
+//    setpos(2, 'brazo', 0.65);
+//    await pausa(1000);
+//    setpos(3, 'brazo', 0.65);
+//    setpos(4, 'brazo', 0.65);
+//    await pausa(1000);
 
+    /*    setpos(2, 'brazo', 0.5);
+        setpos(2, 'antebrazo', 1);
+        await pausa(1000);
+        setpos(2, 'brazo', 0);
+        setpos(1, 'brazo', 0.5);
+        await pausa(1000);
+        setpos(3, 'brazo', 0.5);
+        setpos(3, 'antebrazo', 1);
+        await pausa(1000);
+        setpos(3, 'brazo', 0);
+        setpos(4, 'brazo', 0.5);
+        await pausa(1000);
+    
+    
+        setpos(2, 'brazo', 0.5);
+        setpos(2, 'antebrazo', 0);
+        await pausa(2000);
+    
+        setpos(3, 'brazo', 0.5);
+        setpos(3, 'antebrazo', 0);
+        await pausa(1000);
+    */
 
     //await pausa(5000);
     //off();
