@@ -27,7 +27,7 @@ const pwm = new Pca9685Driver(opt, (err) => {
 });
 console.log('Inicia PWM');
 const setpos = async (pos, channel = 0) => {
-  const max = 1091, min = 145; // 1093, 145... 1092-145
+  const max = 1090, min = 145; // 1093, 145... 1092-145
   const p = (max - min) * pos + min;
   await pwm.setPulseRange(channel, 0, p);
 };
@@ -108,13 +108,14 @@ router.get('/move', async (ctx) => {
     let { posicion, speed = 1, direccion } = ctx.query;
     if (direccion) {
       if (direccion === 'l' || direccion === 'u') {
-        posicion = motor.posicion + 0.025;
+        posicion = Number(motor.posicion) + 0.025;
         if (posicion > 1) posicion = 1;
       } else if (direccion === 'r' || direccion === 'd') {
-        posicion = motor.posicion - 0.025;
+        posicion = Number(motor.posicion) - 0.025;
         if (posicion < 0) posicion = 0;
       } else throw new Error('Direccion de movimiento invalida');
     }
+    posicion=Number(posicion);
     if (posicion < 0 || posicion > 1) throw new Error('La posicion es entre 0 y 1');
     if (speed <= 0 || speed > 1) throw new Error('La speed es entre 0 y 1');
     console.log('Moviendo %s hacia %s velocidad %s', ctx.query.pata, direccion + ' ' + posicion, speed)
@@ -125,5 +126,10 @@ router.get('/move', async (ctx) => {
     ctx.body = { success: false, message: err.message };
   }
 })
+
+router.get('/standup', async (ctx) => {
+  ctx.body = { success: false, message: 'Not Implemented' };
+
+});
 app.use(router.routes());
 module.exports = app;
