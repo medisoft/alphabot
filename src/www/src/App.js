@@ -90,6 +90,7 @@ function App() {
       setpos(4, 'brazo', p);
       await pausa(500);
     }
+    
     // const p=0.8;
     // setpos(1, 'brazo', p);
     // setpos(2, 'brazo', p);
@@ -97,6 +98,17 @@ function App() {
     // setpos(4, 'brazo', p);
 
     await pausa(2000);
+    off();
+  }
+
+
+  const center = async () => {
+    for(let p=1;p<=6;p++) {
+      setpos(p, 'hombro', 0.5);
+      setpos(p, 'brazo', 0.5);
+      setpos(p, 'antebrazo', 0.5);
+      await pausa(500);
+    }
     off();
   }
 
@@ -108,6 +120,7 @@ function App() {
         <Button onClick={() => home()}>Home all</Button>
         <Button onClick={() => stepup()}>Step Up</Button>
         <Button onClick={() => sitdown()}>Sit Down</Button>
+        <Button onClick={() => center()}>Center and Off</Button>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>

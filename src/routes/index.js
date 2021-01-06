@@ -27,7 +27,7 @@ const pwm = new Pca9685Driver(opt, (err) => {
 });
 console.log('Inicia PWM');
 const setpos = async (pos, channel = 0) => {
-  const max = 1090, min = 145; // 1093, 145... 1092-145
+  const max = 1085, min = 145; // 1093, 145... 1092-145
   const p = (max - min) * pos + min;
   await pwm.setPulseRange(channel, 0, p);
 };
@@ -54,8 +54,8 @@ const f = (t) => {
  * @returns {Promise<void>}
  */
 const organic_setpos = async (pos, motor, speed = 1) => {
-//  motor.posicion = pos;
-//  return setpos(motor.posicion, motor.canal);
+  motor.posicion = pos;
+  return setpos(motor.posicion, motor.canal);
   const maxSpeed = 60 / 0.2; // Velocidad maxima del servo segun la spec sheet
   const sumSteps = 29.50247262315665; // Suma total del tiempo requerido, para calcular el factor de multiplicacion de la pausa
   let ini = motor.posicion;
