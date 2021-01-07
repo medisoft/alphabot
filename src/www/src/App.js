@@ -138,7 +138,7 @@ function App() {
     console.log(value, pata, motor);
   }
   return (
-    <Container columns={2} rows={2} divided={true}>
+    <Container columns={2} rows={2}>
       <Row>
         <Button onClick={() => off()}>Poweroff all</Button>
         <Button onClick={() => home()}>Home all</Button>

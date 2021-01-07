@@ -5,6 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+if (window.DeviceOrientationEvent && false) {
+  const deviceOrientationHandler = (e) => {
+    console.log('Orientation', e);
+    document.getElementById("doeSupported").innerText = "Detectado";
+  }
+  window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+  document.getElementById("doeSupported").innerText = "Supported!";
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
