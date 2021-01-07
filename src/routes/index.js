@@ -1,12 +1,14 @@
 const Koa = require('koa');
 const cors = require('@koa/cors');
 const Router = require('koa-router');
-const serve   = require('koa-static')
+const serve   = require('koa-static');
+const send    = require('koa-send')
+const sudo = require('sudo-js');
 
 const router = new Router();
 const app = new Koa();
 app.use(cors());
-app.use(serve(__dirname + '/src/www/build'));
+app.use(serve(__dirname + '/../www/build'));
 
 
 const _ = require('lodash');
@@ -80,12 +82,10 @@ const organic_setpos = async (pos, motor, speed = 1) => {
 pwm.allChannelsOff();
 
 
-router.get('/', async (ctx) => {
-  ctx.body = {
-    data: {
-      message: 'Hello World ...!',
-    },
-  };
+router.get('/shutdown', async (ctx) => {
+  pwm.allChannelsOff();
+  ctx.body = { success: true, message: 'Dispositivo apagado' };
+  sudo.exec('poweroff', console.log);
 });
 
 router.get('/off', async (ctx) => {
@@ -137,6 +137,6 @@ router.get('/standup', async (ctx) => {
 app.use(router.routes());
 
 app.use(function* index() {
-  yield send(this, __dirname + '/src/www/build/index.html');
+  yield send(this, __dirname + '/../www/build/index.html');
 });
 module.exports = app;
